@@ -8,6 +8,7 @@
     "method-override": "^2.3.1",
     "mongoose": "^4.1.4",
     "mysql": "^2.9.0",
+    "nodemailer": "^1.4.0",
     "request": "^2.61.0",
     "sequelize": "^3.6.0",
     "serve-static": "^1.8.1"

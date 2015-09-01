@@ -1,3 +1,5 @@
+var nodemailer = require('nodemailer');
+
 var Utils = function(){}
 
 Utils.prototype.sendEmail = function(email, message){
