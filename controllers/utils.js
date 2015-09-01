@@ -6,8 +6,8 @@ Utils.prototype.sendEmail = function(email, message){
     var transporter = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
-            user: config.email,
-            pass: config.password
+            user: process.env.email,
+            pass: process.env.password
         }
     });
     var mailOptions = {
