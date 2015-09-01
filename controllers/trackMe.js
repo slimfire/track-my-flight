@@ -19,7 +19,7 @@ TrackMe.prototype.flight = function(origin, destination, departureDate, returnin
 							console.log("Yaaay!! Data stored on DB. ")
 							utils.sendEmail('yohazel2@gmail.com', '<h1>Flight tracked</h1> <br> <b> Date : </b>' + 
 								new Date().toISOString() + '<br><b> Origin : </b>' + origin + '<br><b> Destination : </b>'
-								 + destination + '<br><b>Price : </b>' + lights[i].pricing[0].saleTotal + '<br><b>Flight Numbers : </b>' + 
+								 + destination + '<br><b>Price : </b>' + flights[i].pricing[0].saleTotal + '<br><b>Flight Numbers : </b>' + 
 								 departureFlightNumber + ' and ' + returnFlightNumber )
 						}
 					});
