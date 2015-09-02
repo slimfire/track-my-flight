@@ -24,6 +24,10 @@ TrackMe.prototype.flight = function(origin, destination, departureDate, returnin
 						}
 					});
 				}
+				else
+				{
+					console.log('naa : ')
+				}
 			});
 		}
 	});
