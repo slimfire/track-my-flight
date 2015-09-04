@@ -1,5 +1,6 @@
 var request = require('request');
 var trackMeModel = require('../model/model.js');
+var fs = require('fs');
 
 var API = function(){}
 API.prototype.storeFlightDate = function(origin, destination, departureFlightNumber, returnFlightNumber, price, callback) {

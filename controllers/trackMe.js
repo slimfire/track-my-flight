@@ -1,5 +1,6 @@
 var api = require('./api.js');
 var utils = require('./utils.js');
+var fs = require('fs');
 var TrackMe = function (){}
 
 TrackMe.prototype.flight = function(origin, destination, departureDate, returningDate, departureFlightNumber, returnFlightNumber){
@@ -30,6 +31,21 @@ TrackMe.prototype.flight = function(origin, destination, departureDate, returnin
 				}
 			});
 		}
+	});
+}
+
+TrackMe.prototype.sycnOnExcel = function(destination){
+	var data = '';
+	trackMeModel.find({destination : destination}, function(error, flights){
+		var stream = fs.createWriteStream("flight_prices_" + destination + ".xls");
+		stream.once('open', function(fd) {
+		  stream.write("origin\tdestination\tdepartureFlightNumber\treturnFlightNumber\tprice\tdateAndTimeStored\n");
+			flights.forEach(function(flight, i){
+			  stream.write(flight.origin + "\t" + flight.destination + "\t" + flight.departureFlightNumber + "\t" + 
+			  	flight.returnFlightNumber + "\t" + flight.price + "\t" + flight.dateAndTimeStored + "\n");
+			});
+		  stream.end();
+		});
 	});
 }
 
