@@ -1,4 +1,6 @@
 var api = require('./api.js');
+var TrackMe = require('./trackMe.js');
+var utils = require('./utils.js');
 // var parsedFlights = [];
 // api.getFlights('msp', 'jfk', '2015-11-19', '2015-11-24', function(flights) {
 // 	if(flights)
@@ -16,5 +18,7 @@ var api = require('./api.js');
 // 	}
 // });
 
-api.sycnOnExcel('jfk');
-api.sycnOnExcel('dfw');
+// api.sycnOnExcel('jfk');
+// api.sycnOnExcel('dfw');
+
+utils.sendGrid();

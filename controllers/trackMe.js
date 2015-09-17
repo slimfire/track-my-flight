@@ -13,6 +13,10 @@ TrackMe.prototype.flight = function(origin, destination, departureDate, returnin
 					console.log('Yaay!');
 					console.log('Price : ', flights[i].pricing[0].saleTotal);
 					console.log('Date/Time : ', new Date().toISOString());
+					// utils.sendEmail('yohazel2@gmail.com', '<h1>Flight tracked</h1> <br> <b> Date : </b>' + 
+					// 	new Date().toISOString() + '<br><b> Origin : </b>' + origin + '<br><b> Destination : </b>'
+					// 	 + destination + '<br><b>Price : </b>' + flights[i].pricing[0].saleTotal + '<br><b>Flight Numbers : </b>' + 
+					// 	 departureFlightNumber + ' and ' + returnFlightNumber )
 					api.storeFlightDate(origin, destination, departureFlightNumber, returnFlightNumber, flights[i].pricing[0].saleTotal, function(status){
 						console.log(status);
 						if(status)
@@ -31,21 +35,6 @@ TrackMe.prototype.flight = function(origin, destination, departureDate, returnin
 				}
 			});
 		}
-	});
-}
-
-TrackMe.prototype.sycnOnExcel = function(destination){
-	var data = '';
-	trackMeModel.find({destination : destination}, function(error, flights){
-		var stream = fs.createWriteStream("flight_prices_" + destination + ".xls");
-		stream.once('open', function(fd) {
-		  stream.write("origin\tdestination\tdepartureFlightNumber\treturnFlightNumber\tprice\tdateAndTimeStored\n");
-			flights.forEach(function(flight, i){
-			  stream.write(flight.origin + "\t" + flight.destination + "\t" + flight.departureFlightNumber + "\t" + 
-			  	flight.returnFlightNumber + "\t" + flight.price + "\t" + flight.dateAndTimeStored + "\n");
-			});
-		  stream.end();
-		});
 	});
 }
 

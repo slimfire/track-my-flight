@@ -5,33 +5,43 @@ var fs = require('fs');
 var API = function(){}
 API.prototype.storeFlightDate = function(origin, destination, departureFlightNumber, returnFlightNumber, price, callback) {
 
-	var currentPrice = new trackMeModel({
+	// var currentPrice = new trackMeModel({
+	// 	origin : origin,
+	// 	destination : destination,
+	// 	departureFlightNumber : departureFlightNumber,
+	// 	returnFlightNumber : returnFlightNumber,
+	// 	price : price.slice(3),
+	// 	dateAndTimeStored : new Date().toISOString()
+	// });
+console.log('--->',price, parseFloat(price.slice(3)), typeof(price), typeof(parseFloat(price.slice(3))))
+	var data = {
 		origin : origin,
 		destination : destination,
 		departureFlightNumber : departureFlightNumber,
 		returnFlightNumber : returnFlightNumber,
-		price : price.slice(3),
+		price : parseFloat(price.slice(3)),
 		dateAndTimeStored : new Date().toISOString()
-	});
-	currentPrice.save(function(error) {
-		console.log(error)
-		if(!error)
-		{
+	};
+	trackMeModel.create(data).then(function(flight) {
+			console.log("Data stored : ", data );
 			callback(true);
-		}
-		else
-		{
-			callback(false);
-		}
-	})
+		});
+	// currentPrice.save(function(error) {
+	// 	console.log(error)
+	// 	if(!error)
+	// 	{
+	// 		callback(true);
+	// 	}
+	// 	else
+	// 	{
+	// 		callback(false);
+	// 	}
+	// })
 }
 
 API.prototype.fetchFlightData = function(callback) {
-	trackMeModel.find({}, function(error, flight) {
-		if(!error)
-		{
-			callback(flight);
-		}
+	trackMeModel.findAll().then(function(flights) {
+		callback(flights);
 	});
 }
 
@@ -82,5 +92,23 @@ API.prototype.getFlights = function(origin, destination, departureDate, returnin
 	});
 
 };
+
+API.prototype.sycnOnExcel = function(destination){
+	var data = '', dateAndTimeStored;
+	// trackMeModel.find({destination : destination}, function(error, flights){
+	trackMeModel.findAll({ where: {destination: destination} })
+	.then(function(flights){
+		var stream = fs.createWriteStream("flight_prices_" + destination + ".xls");
+		stream.once('open', function(fd) {
+		  stream.write("origin\tdestination\tdepartureFlightNumber\treturnFlightNumber\tprice\tdateAndTimeStored\n");
+			flights.forEach(function(flight, i){
+				dateAndTimeStored = flight.dateAndTimeStored.toISOString().slice(0,10) + " " + flight.dateAndTimeStored.toISOString().slice(12,22);
+			  stream.write(flight.origin + "\t" + flight.destination + "\t" + flight.departureFlightNumber + "\t" + 
+			  	flight.returnFlightNumber + "\t" + flight.price + "\t" + dateAndTimeStored + "\n");
+			});
+		  stream.end();
+		});
+	});
+}
 
 module.exports = new API();
