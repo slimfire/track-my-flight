@@ -1,9 +1,10 @@
 var trackMeModel = require('./model.js');
-	trackMeModel.findAll().then(function(flights) {
-		flights.forEach(function(flight){
-			console.log(flight.dateAndTimeStored, "---", flight.price)
-		})
-	});
+
+trackMeModel.findAll().then(function(flights) {
+	flights.forEach(function(flight){
+		console.log(flight.dateAndTimeStored, "---", flight.price)
+	})
+});
 	// var data = {
 	// 	origin : 'msp',
 	// 	destination : 'dfw',

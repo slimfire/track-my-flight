@@ -6,3 +6,5 @@ var trackMe = require('../controllers/trackMe.js');
 trackMe.flight('msp', 'dfw', '2015-11-17', '2015-11-22', 749, 742);
 // Minneapolis to New York City
 trackMe.flight('msp', 'jfk', '2015-11-17', '2015-11-22', 249, 248);
+//Minneapolise to San Francisco
+trackMe.flight('msp', 'sfo', '2015-11-17', '2015-11-22', 1505, 1106);

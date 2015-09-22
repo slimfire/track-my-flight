@@ -1,8 +1,11 @@
-var api = require('./api.js');
+var API = require('./api.js');
 var TrackMe = require('./trackMe.js');
 var utils = require('./utils.js');
+API.syncOnExcel('dfw');
+API.syncOnExcel('jfk');
+API.syncOnExcel('sfo');
 // var parsedFlights = [];
-// api.getFlights('msp', 'jfk', '2015-11-19', '2015-11-24', function(flights) {
+// API.getFlights('msp', 'jfk', '2015-11-19', '2015-11-24', function(flights) {
 // 	if(flights)
 // 	{	
 // 		// console.log(flights);
@@ -18,7 +21,5 @@ var utils = require('./utils.js');
 // 	}
 // });
 
-// api.sycnOnExcel('jfk');
-// api.sycnOnExcel('dfw');
 
-utils.sendGrid();
+// utils.sendGrid();
