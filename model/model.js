@@ -24,21 +24,3 @@ var flights = sequelize.define('flights', {
 sequelize.sync()
 // flights.drop();
 module.exports = flights;
-
-// var mongoose = require('mongoose');
-// var schema = mongoose.Schema;
-
-// mongoose.connect('mongodb://db_user:db_password@ds035603.mongolab.com:35603/heroku_4rgms0j3');
-
-// var trackMeSchema = new schema({
-// 	origin : String,
-// 	destination : String,
-// 	departureFlightNumber : Number,
-// 	returnFlightNumber : Number,
-// 	price : Number,
-// 	dateAndTimeStored : Date
-// }, {collection : 'flightPriceTracker'});
-
-// var trackMeModel = mongoose.model('flightPriceTracker', trackMeSchema);
-
-// module.exports = trackMeModel;
