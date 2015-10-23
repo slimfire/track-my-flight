@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+
+var API = require('../controllers/api.js');
+
+API.syncOnExcel('dfw', 'NK', 'NK');
+
+API.syncOnExcel('jfk', 'SY', 'SY');
+
+API.syncOnExcel('sfo', 'SY', 'SY');
