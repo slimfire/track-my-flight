@@ -73,18 +73,18 @@ API.prototype.getFlights = function(origin, destination, departureDate, returnin
 
 };
 
-API.prototype.syncOnExcel = function(destination){
-	var data = '', dateAndTimeStored;
-	// trackMeModel.find({destination : destination}, function(error, flights){
+API.prototype.syncOnExcel = function(destination, departureAirline, returnAirline){
+	var data = '', date, time;
 	trackMeModel.findAll({ where: {destination: destination} })
 	.then(function(flights){
-		var stream = fs.createWriteStream("flight_prices_" + destination + ".xls");
+		var stream = fs.createWriteStream("flight_prices_" + destination + ".csv");
 		stream.once('open', function(fd) {
-		  stream.write("origin\tdestination\tdepartureFlightNumber\treturnFlightNumber\tprice\tdateAndTimeStored\n");
+		  stream.write("date\ttime\tdepartureAirline\tdepartureFlightNumber\treturnAirline\treturnFlightNumber\tprice\n");
 			flights.forEach(function(flight, i){
-				dateAndTimeStored = new Date(flight.dateAndTimeStored).toISOString().slice(0,10) + " " + new Date(flight.dateAndTimeStored).toISOString().slice(12,22);
-			  stream.write(flight.origin + "\t" + flight.destination + "\t" + flight.departureFlightNumber + "\t" + 
-			  	flight.returnFlightNumber + "\t" + flight.price + "\t" + dateAndTimeStored + "\n");
+				date = new Date(flight.dateAndTimeStored).toISOString().slice(0,10);
+				time = new Date(flight.dateAndTimeStored).toISOString().slice(12,19); 
+			  stream.write(date + "\t" + time + "\t" + departureAirline + "\t" + flight.departureFlightNumber + "\t" + 
+			  	 returnAirline+ "\t" + flight.returnFlightNumber+ "\t" + Math.ceil(flight.price) + "\t" + "\n");
 			});
 		  stream.end();
 		});
