@@ -7,4 +7,4 @@ trackMe.flight('msp', 'dfw', '2015-11-17', '2015-11-22', 749, 742); // NK
 // Minneapolis to New York City
 trackMe.flight('msp', 'jfk', '2015-11-17', '2015-11-22', 249, 248); // sy
 //Minneapolise to San Francisco
-// trackMe.flight('msp', 'sfo', '2015-11-17', '2015-11-22', 395, 396); //sy
+trackMe.flight('msp', 'sfo', '2015-11-17', '2015-11-22', 395, 396); //sy
